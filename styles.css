@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffe6ee, #fff0f5, #ffe6ee);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Floating hearts background */
+.hearts-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    color: #ffb6c1;
+    opacity: 0.3;
+    animation: floatHeart linear infinite;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    padding: 20px;
+}
+
+/* Main question screen */
+#question-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#question-screen h1 {
+    font-size: 2.5rem;
+    color: #d4456a;
+    text-shadow: 2px 2px 4px rgba(212, 69, 106, 0.2);
+    margin-bottom: 10px;
+}
+
+.main-image-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.main-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+    min-height: 120px;
+    width: 100%;
+}
+
+.btn-yes {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #ff6b8a, #ee3a6d);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(238, 58, 109, 0.4);
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.btn-yes:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(238, 58, 109, 0.6);
+}
+
+.no-btn-wrapper {
+    position: relative;
+    z-index: 20;
+}
+
+.btn-no {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #ccc, #aaa);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.btn-no:hover {
+    background: linear-gradient(135deg, #bbb, #999);
+}
+
+/* Angry character popup near No button */
+.angry-popup {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 30;
+    top: -130px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.angry-popup.show {
+    animation: angryFadeInOut 1s ease forwards;
+}
+
+@keyframes angryFadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+    20% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+    30% { opacity: 1; transform: translateX(-50%) scale(1); }
+    70% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+}
+
+/* Yes screen */
+#yes-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeInUp 0.8s ease;
+}
+
+#yes-screen h1 {
+    font-size: 2.8rem;
+    color: #d4456a;
+    text-shadow: 2px 2px 4px rgba(212, 69, 106, 0.2);
+}
+
+#yes-screen p {
+    font-size: 1.3rem;
+    color: #e87a9e;
+    margin-top: -10px;
+}
+
+.yes-image-container {
+    width: 300px;
+    height: 300px;
+}
+
+.yes-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Heart burst animation on yes */
+.heart-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    font-size: 30px;
+    animation: burstHeart 1.5s ease forwards;
+}
+
+@keyframes burstHeart {
+    0% {
+        opacity: 1;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(360deg) translateY(-200px);
+    }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 99;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+/* Subtle bounce for main image */
+.bounce-gentle {
+    animation: gentleBounce 3s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Shake animation for angry popup */
+.shake {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
