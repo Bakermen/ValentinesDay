@@ -85,6 +85,8 @@
             width: 280px;
             height: 280px;
             margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
         }
 
         .main-image-container img {
@@ -345,8 +347,23 @@
         const btnYes = document.getElementById('btn-yes');
         const noWrapper = document.getElementById('no-btn-wrapper');
         const angryPopup = document.getElementById('angry-popup');
+        const mainImg = document.querySelector('.main-image-container img');
         let yesScale = 1;
+        let imgScale = 1;
         let dodgeCount = 0;
+
+        const desperateMessages = [
+            'Yes!',
+            'Please?',
+            'Pretty please?',
+            'I beg you!!',
+            'PLEASE SAY YES',
+            'I NEED YOU',
+            'DONT DO THIS TO ME',
+            'IM ON MY KNEES',
+            'I WILL CRY',
+            'SAY YES ALREADY!!',
+        ];
 
         function getRandomPosition() {
             const padding = 20;
@@ -361,10 +378,17 @@
         function dodgeNoButton() {
             dodgeCount++;
 
-            // Make Yes button bigger
+            // Make Yes button bigger and more desperate
             yesScale += 0.15;
             btnYes.style.transform = `scale(${yesScale})`;
             btnYes.style.zIndex = '20';
+            const msgIndex = Math.min(dodgeCount, desperateMessages.length) - 1;
+            btnYes.textContent = desperateMessages[msgIndex];
+
+            // Zoom into the character's face (center of image)
+            imgScale += 0.2;
+            mainImg.style.transition = 'transform 0.3s ease';
+            mainImg.style.transform = `scale(${imgScale})`;
 
             // Move No button to a random position
             const pos = getRandomPosition();
