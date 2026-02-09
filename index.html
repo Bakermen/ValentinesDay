@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0, #f48fb1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #c62828;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #e91e63;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .characters {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 900px;
+        }
+
+        .character-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(233, 30, 99, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 250px;
+        }
+
+        .character-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(233, 30, 99, 0.25);
+        }
+
+        .character-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .character-card h2 {
+            color: #ad1457;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .character-card p {
+            color: #880e4f;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            margin-top: 3rem;
+            color: #c62828;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <h1>Happy Valentine's Day!</h1>
+    <p class="subtitle">A little gallery of love</p>
+
+    <div class="characters">
+        <div class="character-card">
+            <img src="assets/images/flower-love.png" alt="Character holding flowers">
+            <h2>Flower Love</h2>
+            <p>Shyly holding a bouquet of red flowers, blushing with affection.</p>
+        </div>
+
+        <div class="character-card">
+            <img src="assets/images/angry-blush.png" alt="Angry blushing character">
+            <h2>Tsundere</h2>
+            <p>It's not like I made you a valentine or anything... baka!</p>
+        </div>
+
+        <div class="character-card">
+            <img src="assets/images/starry-eyes.png" alt="Character with starry eyes">
+            <h2>Starry-Eyed</h2>
+            <p>Looking at you with eyes full of sparkles and admiration.</p>
+        </div>
+    </div>
+
+    <footer>Made with love</footer>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = ['❤', '💕', '💗', '💖', '💘'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
